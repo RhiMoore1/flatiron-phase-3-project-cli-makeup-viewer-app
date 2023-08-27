@@ -58,6 +58,11 @@ class Makeup(Base):
     users = relationship("User", secondary=user_makeup_favorite, back_populates="makeups")
 
 
+    @classmethod
+    def find_by_makeup_name(cls, name):
+        makeup = session.query(Makeup).filter(Makeup.name == name).first()
+        return makeup
+
     def __repr__(self):
         return f"\n Makeup ID: {self.id}: "\
             + f"Product Name: {self.name} "\
