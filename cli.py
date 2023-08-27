@@ -89,7 +89,8 @@ class Cli():
             self.handle_delete_a_makeup()
         elif menu_index == 3:
             print("Favorite a makeup")
-            self.handle_favorite_a_makeup()
+            self.current_makeup_product = input("Enter a makeup name: ")
+            self.handle_favorite_a_makeup(self.current_user.id, self.current_makeup_product)
         else:
             self.handle_exit()
 
@@ -162,6 +163,22 @@ class Cli():
             self.handle_manage_makeups()
 
 
+    #  VIEW FAVORITES
+    def handle_view_favorites(self):
+        self.clear_display()
+        user_favorites = self.current_user.makeups
+        if not user_favorites:
+            print("User has no favorites")
+            time.sleep(3)
+            self.handle_view_makeups()
+        else:
+            makeup_data = [(makeup.id, makeup.name, makeup.brand, makeup.product_type)for makeup in user_favorites]
+            headers = ["ID", "Name", "Brand", "Type"]
+            table = tabulate(makeup_data, headers, tablefmt="grid")
+            print("Makeup favorites...")
+            print(table)
+            time.sleep(2)
+            self.handle_manage_makeups()
 
     # CREATE NEW MAKEUP
     def handle_create_new_makeup(self):
