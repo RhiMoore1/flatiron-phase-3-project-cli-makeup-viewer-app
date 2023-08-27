@@ -1,6 +1,18 @@
-from sqlalchemy import (Column, String, Integer, Column, Index)
+from sqlalchemy import (Column, String, Integer, Column, Index, Table, ForeignKey, relationship)
 from sqlalchemy.orm import declarative_base
 Base = declarative_base()
+
+
+
+
+
+user_makeup_favorite = Table(
+    "user_makeup_favorites",
+    Base.metadata,
+    Column("user_id", ForeignKey("users.id"), primary_key=True),
+    Column("makeup_id", ForeignKey("makeups.id"), primary_key=True)
+)
+
 
 
 
@@ -9,6 +21,8 @@ class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True)
+
+    makeups = relationship("Makeup", secondary=user_makeup_favorite, back_populates="users")
 
 
     def __repr__(self):
@@ -30,6 +44,8 @@ class Makeup(Base):
     name = Column(String)
     brand = Column(String)
     product_type = Column(String)
+
+    users = relationship("User", secondary=user_makeup_favorite, back_populates="makeups")
 
 
     def __repr__(self):
