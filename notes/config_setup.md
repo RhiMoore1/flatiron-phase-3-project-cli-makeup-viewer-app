@@ -132,12 +132,11 @@
         - 
     - session.query(Makeup).get(id)
 
-## 10. create the entry point for CLI - (Friday Lecture need to watch)
+## 10. create the entry point for CLI
  - create a new cli.py file
     - create a cli class and call start method to instantiate new cli and run start method
         - app = Cli()
         - app.start()
-    - 
 
 ## 11. Git branches
  - git checkout -b migrations_work
