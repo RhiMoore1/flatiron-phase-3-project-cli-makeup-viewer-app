@@ -11,6 +11,12 @@ class User(Base):
     username = Column(String, unique=True)
 
 
+    def __repr__(self):
+        return f"\n User ID: {self.id}: "\
+            + f"Username {self.username} "
+
+
+
 
 
 
@@ -24,3 +30,10 @@ class Makeup(Base):
     name = Column(String)
     brand = Column(String)
     product_type = Column(String)
+
+
+    def __repr__(self):
+        return f"\n Makeup ID: {self.id}: "\
+            + f"Product Name: {self.name} "\
+            + f"Product Brand: {self.brand} "\
+            + f"Product Type: {self.product_type}"
