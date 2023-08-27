@@ -93,6 +93,12 @@ class Cli():
 
 
 
+    # EXIT
+    def handle_exit(self):
+        self.clear_display()
+        print("Exiting program...")  
+
+
 
 app = Cli()
 app.start()
