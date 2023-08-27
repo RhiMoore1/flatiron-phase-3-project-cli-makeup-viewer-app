@@ -26,6 +26,8 @@ class User(Base):
 
     makeups = relationship("Makeup", secondary=user_makeup_favorite, back_populates="users")
 
+    def __init__(self, username):
+        self.username = username
 
     @classmethod
     def find_by_username(cls, username):
