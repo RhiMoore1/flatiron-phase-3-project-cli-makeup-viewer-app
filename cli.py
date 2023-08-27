@@ -221,7 +221,24 @@ class Cli():
         else:
             self.handle_manage_makeups()
         
-        
+
+    # DELETE A MAKEUP
+    def handle_delete_a_makeup(self):
+        self.clear_display()
+        print("Delete Makeup")
+        makeup_name = input("Enter name of makeup to delete or type 'exit' to return to main menu: ")
+        if makeup_name.lower() != "exit":
+            makeup = session.query(Makeup).filter_by(name=makeup_name).first()
+            if makeup:
+                session.delete(makeup)
+                session.commit()
+                print("Makeup has been deleted")
+            else:
+                print("Makeup does not exist in database")
+            time.sleep(1)
+            self.handle_manage_makeups()
+        else:
+            self.handle_manage_makeups()
 
 
     # CLEAR DISPLAY
