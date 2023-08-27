@@ -228,6 +228,29 @@ class Cli():
             self.handle_manage_makeups()
 
 
+# FAVORITE A MAKEUP (ADD TO A LIST)
+    def handle_favorite_a_makeup(self, user_id, makeup_name):
+        self.clear_display()
+        makeup = self.current_makeup
+        user = session.query(User).get(user_id)
+        makeup = session.query(Makeup).filter_by(name=makeup_name).first()
+
+        
+        if makeup in user.makeups:
+            print(f"{user.username} already favorited {makeup.name}")
+            time.sleep(3)
+            self.handle_manage_makeups()
+        elif not makeup:
+            print('Makeup does not exist')
+            time.sleep(3)
+            self.handle_manage_makeups()
+        else:
+            user.makeups.append(makeup)
+            print(f'{makeup.name} added to favorites')
+            time.sleep(2)
+            self.handle_manage_makeups()
+        session.commit()
+
     # CLEAR DISPLAY
     def clear_display(self):
         os.system("clear")
