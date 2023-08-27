@@ -180,6 +180,7 @@ class Cli():
             time.sleep(2)
             self.handle_manage_makeups()
 
+            
     # CREATE NEW MAKEUP
     def handle_create_new_makeup(self):
         self.clear_display()
@@ -235,7 +236,6 @@ class Cli():
         user = session.query(User).get(user_id)
         makeup = session.query(Makeup).filter_by(name=makeup_name).first()
 
-        
         if makeup in user.makeups:
             print(f"{user.username} already favorited {makeup.name}")
             time.sleep(3)
@@ -250,6 +250,7 @@ class Cli():
             time.sleep(2)
             self.handle_manage_makeups()
         session.commit()
+
 
     # CLEAR DISPLAY
     def clear_display(self):
