@@ -1,6 +1,6 @@
 from simple_term_menu import TerminalMenu
 from sqlalchemy import create_engine
-import time
+import time, os
 from models import User, Makeup
 from sqlalchemy.orm import sessionmaker
 
@@ -18,6 +18,7 @@ class Cli():
 
     # START PROGRAM
     def start(self):
+        self.clear_display()
         options = ["Login", "Sign Up", "Exit"]
         terminal_menu = TerminalMenu(options)
         menu_index = terminal_menu.show()
@@ -32,6 +33,7 @@ class Cli():
 
     # LOGIN
     def handle_login(self):
+        self.clear_display()
         username = input("Enter Username: ")
         
         user = User.find_by_username(username)
@@ -47,6 +49,7 @@ class Cli():
 
     # SIGNUP
     def handle_signup(self):
+        self.clear_display()
         username = input("Create a Username: ")
 
         if len(username) < 6:
@@ -69,9 +72,9 @@ class Cli():
                 self.start()
  
 
-
 # MANAGE MAKEUP - ENTRY POINT 
     def handle_manage_makeups(self):
+        self.clear_display()
         options = ["View Makeups", "Create a Makeup", "Delete a Makeup", "Favorite a Makeup", "Exit"]
         terminal_menu = TerminalMenu(options)
         menu_index = terminal_menu.show()
@@ -91,6 +94,12 @@ class Cli():
         else:
             self.handle_exit()
 
+
+    # CLEAR DISPLAY
+    def clear_display(self):
+        os.system("clear")
+        print("Welcome to the Makeup Viewer App!")
+        print("\n")
 
 
     # EXIT
