@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 import time, os
 from models import User, Makeup
 from sqlalchemy.orm import sessionmaker
+from tabulate import tabulate
 
 engine = create_engine('sqlite:///makeup_data.db')
 Session = sessionmaker(bind=engine)
@@ -149,6 +150,27 @@ class Cli():
             self.handle_manage_makeups()
         else:
             self.handle_exit()
+
+
+# VIEW BY NAME
+    def handle_view_makeups_by_name(self, user_input_makeup_name):
+        self.clear_display()
+        makeup = Makeup.find_by_makeup_name(user_input_makeup_name)
+
+        if not makeup:
+            print("Product name does not exist")
+            time.sleep(1)
+            self.handle_view_makeups()
+        else:
+            self.current_makeup = makeup
+            makeup_data = [(makeup.id, makeup.name, makeup.brand, makeup.product_type)]
+            headers = ["ID", "Name", "Brand", "Type"]
+            table = tabulate(makeup_data, headers, tablefmt="grid")
+            print("Makeup available...")
+            print(table)
+            time.sleep(2)
+            self.handle_manage_makeups()
+
 
 
     # CLEAR DISPLAY
