@@ -172,6 +172,26 @@ class Cli():
             self.handle_manage_makeups()
 
 
+    # VIEW BY PRODUCT TYPE
+    def handle_view_makeups_by_product_type(self, user_input_makeup_product_type):
+        self.clear_display()
+        makeup_items = Makeup.find_by_product_type(user_input_makeup_product_type)
+
+        if not makeup_items:
+            print("Product type does not exist")
+            time.sleep(1)
+            self.handle_view_makeups()
+        else:
+            self.current_makeup_product = makeup_items
+            makeup_data = [(makeup.id, makeup.name, makeup.brand, makeup.product_type) for makeup in makeup_items]
+            headers = ["ID", "Name", "Brand", "Type"]
+            table = tabulate(makeup_data, headers, tablefmt="grid")
+            print("Makeup available...")
+            print(table)
+            time.sleep(2)
+            self.handle_manage_makeups()
+
+
 
     # CLEAR DISPLAY
     def clear_display(self):
