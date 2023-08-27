@@ -11,7 +11,13 @@ import json
 import requests 
 from faker import Faker
 fake = Faker()
+print("🌱 Seeding DB...")
 
+
+# Reset DB
+session.query(User).delete()
+session.query(Makeup).delete()
+session.query(user_makeup_favorite).delete()
 
 
 # Use faker to seed 5 Users
@@ -62,3 +68,6 @@ for brand in BRANDS:
 
         session.add(new_makeup_product)
         session.commit()
+
+
+print("✅ Done seeding!")
