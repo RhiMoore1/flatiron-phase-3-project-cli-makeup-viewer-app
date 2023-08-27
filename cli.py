@@ -193,6 +193,37 @@ class Cli():
 
 
 
+    # CREATE NEW MAKEUP
+    def handle_create_new_makeup(self):
+        self.clear_display()
+        print("Create a new Makeup product\n")
+        name = input("Enter Makeup Product Name or type 'exit' to return to main menu: ")
+        if name.lower() != "exit":
+            if len(name) < 2:
+                print("Makeup name must be more than 1 character")
+                time.sleep(2)
+                self.handle_manage_makeups()
+            else:
+                existing_makeup = session.query(Makeup).filter_by(name=name).first()
+                if existing_makeup:
+                    print("Makeup already added")
+                    time.sleep(3)
+                    self.handle_manage_makeups()
+                elif len(name) > 1:
+                    brand = input("Enter Makeup Product Brand: ")
+                    product_type = input("Enter Makeup Product Category: ")
+                    new_makeup_product = Makeup(name=name, brand=brand, product_type=product_type)
+                    session.add(new_makeup_product)
+                    session.commit()
+                    print("Makeup has been added")
+                    time.sleep(1)
+                    self.handle_manage_makeups()
+        else:
+            self.handle_manage_makeups()
+        
+        
+
+
     # CLEAR DISPLAY
     def clear_display(self):
         os.system("clear")
