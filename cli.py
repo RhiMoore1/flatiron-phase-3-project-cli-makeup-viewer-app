@@ -9,8 +9,6 @@ engine = create_engine('sqlite:///makeup_data.db')
 Session = sessionmaker(bind=engine)
 session = Session()
 
-
-
 class Cli():
     def __init__(self):
         self.current_user = None
@@ -92,34 +90,6 @@ class Cli():
         elif menu_index == 3:
             print("Favorite a makeup")
             self.handle_favorite_a_makeup()
-        else:
-            self.handle_exit()
-
-
-# VIEW MAKEUP - ENTRY POINT
-    def handle_view_makeups(self):
-        options = ["View by product name", "View by product type", "View favorites", "Main Menu", "Exit"]
-        terminal_menu = TerminalMenu(options)
-        menu_index = terminal_menu.show()
-
-        if menu_index == 0:   
-            user_input_makeup_name = input("View by name or type 'exit' to return to main menu ")
-            if user_input_makeup_name.lower() != "exit":
-                self.handle_view_makeups_by_name(user_input_makeup_name)
-            else:
-                self.handle_manage_makeups()
-        elif menu_index == 1:
-            user_input_makeup_product_type = input("View by product type or 'exit' to return to main menu ")
-            if user_input_makeup_product_type.lower() != "exit":
-                self.handle_view_makeups_by_product_type(user_input_makeup_product_type)
-            else: 
-                self.handle_manage_makeups()
-        elif menu_index == 2:
-            print("View favorites")
-            self.handle_view_favorites()
-        elif menu_index == 3:
-            print("Main Menu")
-            self.handle_manage_makeups()
         else:
             self.handle_exit()
 
