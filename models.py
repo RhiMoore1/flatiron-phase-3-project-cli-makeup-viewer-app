@@ -62,6 +62,12 @@ class Makeup(Base):
     def find_by_makeup_name(cls, name):
         makeup = session.query(Makeup).filter(Makeup.name == name).first()
         return makeup
+    
+    @classmethod
+    def find_by_product_type(cls, product_type):
+        makeup = session.query(Makeup).filter(Makeup.product_type == product_type).all()
+        return makeup
+
 
     def __repr__(self):
         return f"\n Makeup ID: {self.id}: "\
