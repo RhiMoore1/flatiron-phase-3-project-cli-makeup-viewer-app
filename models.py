@@ -1,8 +1,11 @@
-from sqlalchemy import (Column, String, Integer, Column, Index, Table, ForeignKey)
+from sqlalchemy import (Column, String, Integer, Column, Index, Table, ForeignKey, create_engine)
 from sqlalchemy.orm import declarative_base, relationship
 Base = declarative_base()
+from sqlalchemy.orm import sessionmaker
 
-
+engine = create_engine('sqlite:///makeup_data.db')
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 
@@ -16,7 +19,6 @@ user_makeup_favorite = Table(
 
 
 
-
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
@@ -24,6 +26,12 @@ class User(Base):
 
     makeups = relationship("Makeup", secondary=user_makeup_favorite, back_populates="users")
 
+
+    @classmethod
+    def find_by_username(cls, username):
+        user = session.query(User).filter(User.username == username).first()
+        return user
+    
 
     def __repr__(self):
         return f"\n User ID: {self.id}: "\
