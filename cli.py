@@ -43,6 +43,7 @@ class Cli():
             return
         else:
             self.current_user = user
+            self.clear_display()
             self.handle_manage_makeups()
 
 
@@ -64,6 +65,7 @@ class Cli():
                 session.commit()
                 print(f"Your Username is: {user.username}")
                 time.sleep(3)
+                self.clear_display()
                 self.handle_manage_makeups()
             else:
                 print("User already exists. Please log in or create a new user.")
@@ -125,7 +127,6 @@ class Cli():
 
 # VIEW BY NAME
     def handle_view_makeups_by_name(self, user_input_makeup_name):
-        # self.clear_display()
         makeup = Makeup.find_by_makeup_name(user_input_makeup_name)
 
         if not makeup:
@@ -145,7 +146,6 @@ class Cli():
 
     # VIEW BY PRODUCT TYPE
     def handle_view_makeups_by_product_type(self, user_input_makeup_product_type):
-        # self.clear_display()
         makeup_items = Makeup.find_by_product_type(user_input_makeup_product_type)
 
         if not makeup_items:
@@ -165,7 +165,6 @@ class Cli():
 
     #  VIEW FAVORITES
     def handle_view_favorites(self):
-        # self.clear_display()
         user_favorites = self.current_user.makeups
         if not user_favorites:
             print("User has no favorites")
@@ -256,7 +255,7 @@ class Cli():
     def clear_display(self):
         os.system("clear")
         print("Welcome to the Makeup Viewer App!")
-        print("\n")
+        print("\n\n")
 
 
     # EXIT
