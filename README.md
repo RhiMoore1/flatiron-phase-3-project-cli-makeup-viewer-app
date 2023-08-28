@@ -23,6 +23,11 @@ The Makeup Viewer App is a CLI application that allows a user to create an accou
 After running the python3 cli.py command, the user is prompted to either login, signup or exit the program.  After logging in or signing up, the user is brought to the main menu.  When choosing "View Makeups" options for view by name, product type, or favorites populate.  Other main menu options include: create a new product, delete an existing product, or add a product to a favorites list.  The Makeup Viewer App allows users to view a large number makeup products and keep track of favorite products.
 
 
+ ### Contributions
+ Makeup database populated by the makeup API from
+ http://makeup-api.herokuapp.com/api/v1/products
+ 
+
 
  ### MIT License
 
