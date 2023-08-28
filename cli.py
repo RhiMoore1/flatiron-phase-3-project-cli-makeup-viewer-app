@@ -73,7 +73,7 @@ class Cli():
 
 # MANAGE MAKEUP - ENTRY POINT 
     def handle_manage_makeups(self):
-        self.clear_display()
+        # self.clear_display()
         options = ["View Makeups", "Create a Makeup", "Delete a Makeup", "Favorite a Makeup", "Exit"]
         terminal_menu = TerminalMenu(options)
         menu_index = terminal_menu.show()
@@ -125,7 +125,7 @@ class Cli():
 
 # VIEW BY NAME
     def handle_view_makeups_by_name(self, user_input_makeup_name):
-        self.clear_display()
+        # self.clear_display()
         makeup = Makeup.find_by_makeup_name(user_input_makeup_name)
 
         if not makeup:
@@ -136,7 +136,7 @@ class Cli():
             self.current_makeup = makeup
             makeup_data = [(makeup.id, makeup.name, makeup.brand, makeup.product_type)]
             headers = ["ID", "Name", "Brand", "Type"]
-            table = tabulate(makeup_data, headers, tablefmt="grid")
+            table = tabulate(makeup_data, headers, tablefmt="fancy_grid")
             print("Makeup available...")
             print(table)
             time.sleep(2)
@@ -145,7 +145,7 @@ class Cli():
 
     # VIEW BY PRODUCT TYPE
     def handle_view_makeups_by_product_type(self, user_input_makeup_product_type):
-        self.clear_display()
+        # self.clear_display()
         makeup_items = Makeup.find_by_product_type(user_input_makeup_product_type)
 
         if not makeup_items:
@@ -156,7 +156,7 @@ class Cli():
             self.current_makeup_product = makeup_items
             makeup_data = [(makeup.id, makeup.name, makeup.brand, makeup.product_type) for makeup in makeup_items]
             headers = ["ID", "Name", "Brand", "Type"]
-            table = tabulate(makeup_data, headers, tablefmt="grid")
+            table = tabulate(makeup_data, headers, tablefmt="fancy_grid")
             print("Makeup available...")
             print(table)
             time.sleep(2)
@@ -165,7 +165,7 @@ class Cli():
 
     #  VIEW FAVORITES
     def handle_view_favorites(self):
-        self.clear_display()
+        # self.clear_display()
         user_favorites = self.current_user.makeups
         if not user_favorites:
             print("User has no favorites")
@@ -174,7 +174,7 @@ class Cli():
         else:
             makeup_data = [(makeup.id, makeup.name, makeup.brand, makeup.product_type)for makeup in user_favorites]
             headers = ["ID", "Name", "Brand", "Type"]
-            table = tabulate(makeup_data, headers, tablefmt="grid")
+            table = tabulate(makeup_data, headers, tablefmt="fancy_grid")
             print("Makeup favorites...")
             print(table)
             time.sleep(2)
