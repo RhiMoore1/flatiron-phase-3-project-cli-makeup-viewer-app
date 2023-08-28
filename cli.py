@@ -245,10 +245,12 @@ class Cli():
             self.handle_manage_makeups()
         else:
             user.makeups.append(makeup)
+            session.add(makeup)
+            session.commit()
             print(f'{makeup.name} added to favorites')
             time.sleep(2)
             self.handle_manage_makeups()
-        session.commit()
+        # session.commit()
 
 
     # CLEAR DISPLAY
