@@ -250,7 +250,7 @@ class Cli():
             print(f'{makeup.name} added to favorites')
             time.sleep(2)
             self.handle_manage_makeups()
-        # session.commit()
+        
 
 
     # CLEAR DISPLAY
